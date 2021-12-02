@@ -38,8 +38,9 @@ class Customer(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
     date_of_edition = models.DateField(auto_now=True)
     adress = models.CharField(max_length=300, help_text="Enter the adress of the organization")
-    phone = models.ManyToManyField(Phone, help_text="Select phone number")
-    email = models.ManyToManyField(Email, help_text="Select email")
+    phone = models.ManyToManyField(Phone, help_text="Enter phone number")
+    email = models.ManyToManyField(Email, help_text="Enter email")
+
 
     def __str__(self):
         """

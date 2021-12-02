@@ -1,0 +1,29 @@
+{% extends "catalog/../base_generic.html" %}
+
+{% block title %}Customer List{% endblock %}
+
+{% block content %}
+    <h1>Customer List</h1>
+
+    {% if customer_list %}
+    <ul>
+
+      {% for customer in customer_list %}
+      <li>
+          <p><strong>Company name: </strong>{{customer.company_name}}</p>
+          <p><strong>Foreman: </strong>{{customer.foreman_name}}</p>
+          <p><strong>Decsriptions: </strong></p><p>{{customer.descriptions}}</p>
+          <p><strong>Date of creation: </strong>{{customer.date_of_creation}}</p>
+          <p><strong>Date of edition: </strong>{{customer.date_of_edition}}</p>
+          <p><strong>Adress: </strong>{{customer.adress}}</p>
+          <p><strong>Phone: </strong>{% for phone in customer.phone.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+          <p><strong>Email: </strong>{% for email in customer.email.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+      </li>
+          <br>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no customers in the list.</p>
+    {% endif %} 
+{% endblock %}

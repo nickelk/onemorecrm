@@ -1,6 +1,9 @@
 # Create your views here.
-from django.views.generic import TemplateView
+from django.views.generic import ListView
+from .models import Customer
 
 
-class HomePageView(TemplateView):
-    template_name = "home.html"
+class CustomerListView(ListView):
+
+    model = Customer
+    paginate_by = 5
