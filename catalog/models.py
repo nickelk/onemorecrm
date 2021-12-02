@@ -1,7 +1,9 @@
 from django.db import models
 
-
 # Create your models here.
+from django.urls import reverse
+
+
 class Phone(models.Model):
     """
     Class defining a model, derived from the Model class.
@@ -41,9 +43,14 @@ class Customer(models.Model):
     phone = models.ManyToManyField(Phone, help_text="Enter phone number")
     email = models.ManyToManyField(Email, help_text="Enter email")
 
-
     def __str__(self):
         """
         String for representing the Model object
         """
         return self.company_name
+
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular book instance.
+        """
+        return reverse('customer-detail', args=[str(self.id)])
