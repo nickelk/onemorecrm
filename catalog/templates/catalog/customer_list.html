@@ -7,22 +7,34 @@
 
     {% if customer_list %}
     <ul>
-
       {% for customer in customer_list %}
       <li>
           <a href="{{ customer.get_absolute_url }}">{{customer.company_name}}</a>
-{#          <p><strong>Foreman: </strong>{{customer.foreman_name}}</p>#}
-{#          <p><strong>Decsriptions: </strong></p><p>{{customer.descriptions}}</p>#}
-{#          <p><strong>Date of creation: </strong>{{customer.date_of_creation}}</p>#}
-{#          <p><strong>Date of edition: </strong>{{customer.date_of_edition}}</p>#}
-{#          <p><strong>Adress: </strong>{{customer.adress}}</p>#}
-{#          <p><strong>Phone: </strong>{% for phone in customer.phone.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>#}
-{#          <p><strong>Email: </strong>{% for email in customer.email.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>#}
       </li>
       {% endfor %}
-
     </ul>
     {% else %}
       <p>There are no customers in the list.</p>
-    {% endif %} 
+    {% endif %}
+
+    {% if page_obj.paginator.num_pages > 1 %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+    {% endif %}
+
 {% endblock %}

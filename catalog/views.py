@@ -4,9 +4,8 @@ from .models import Customer
 
 
 class CustomerListView(generic.ListView):
-
     model = Customer
-    paginate_by = 5
+    paginate_by = 4
 
 
 class CustomerDetailView(generic.DetailView):
