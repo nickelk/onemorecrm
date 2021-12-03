@@ -10,3 +10,13 @@ class CustomerListView(generic.ListView):
 
 class CustomerDetailView(generic.DetailView):
     model = Customer
+
+
+class CustomerCreate(generic.edit.CreateView):
+    model = Customer
+    fields = '__all__'
+
+
+class CustomerUpdate(generic.edit.UpdateView):
+    model = Customer
+    fields = '__all__'
