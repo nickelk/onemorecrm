@@ -1,14 +1,18 @@
 # Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .models import Customer
+from django.urls import reverse
 
 
-class CustomerListView(generic.ListView):
+class CustomerListView(LoginRequiredMixin, generic.ListView):
+    login_url = 'accounts/login'
     model = Customer
     paginate_by = 4
 
 
-class CustomerDetailView(generic.DetailView):
+class CustomerDetailView(LoginRequiredMixin, generic.DetailView):
+    login_url = 'accounts/login'
     model = Customer
 
 
