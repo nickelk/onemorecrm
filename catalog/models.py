@@ -1,4 +1,5 @@
 from django.db import models
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 from django.urls import reverse
@@ -36,7 +37,7 @@ class Customer(models.Model):
     """
     company_name = models.CharField(max_length=300, help_text="Enter company name")
     foreman_name = models.CharField(max_length=300, help_text="Enter foreman's name")
-    descriptions = models.TextField(help_text="Describe the company")
+    descriptions = RichTextField(help_text="Describe the company")
     date_of_creation = models.DateField(auto_now_add=True)
     date_of_edition = models.DateField(auto_now=True)
     adress = models.CharField(max_length=300, help_text="Enter the adress of the organization")
