@@ -76,6 +76,12 @@ class Project(models.Model):
         """
         return self.title
 
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular project instance.
+        """
+        return reverse('project-detail', args=[str(self.id)])
+
 
 class Interaction(models.Model):
     """

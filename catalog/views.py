@@ -1,7 +1,7 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
-from .models import Customer
+from .models import Customer, Project
 from django.urls import reverse
 
 
@@ -23,4 +23,23 @@ class CustomerCreate(generic.edit.CreateView):
 
 class CustomerUpdate(generic.edit.UpdateView):
     model = Customer
+    fields = '__all__'
+
+
+class ProjectListView(generic.ListView):
+    model = Project
+    paginate_by = 4
+
+
+class ProjectDetailView(generic.DetailView):
+    model = Project
+
+
+class ProjectCreate(generic.edit.CreateView):
+    model = Project
+    fields = '__all__'
+
+
+class ProjectUpdate(generic.edit.UpdateView):
+    model = Project
     fields = '__all__'

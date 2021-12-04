@@ -1,21 +1,25 @@
 {% extends "base_generic.html" %}
 
-{% block title %}Customer List{% endblock %}
+{% block title %}Projects List{% endblock %}
 
 {% block content %}
-    <h1>Customer List</h1>
+    <h1>Projects List</h1>
 
-    {% if customer_list %}
+    {% if project_list %}
     <ul>
-      {% for customer in customer_list %}
+      {% for project in project_list %}
       <li>
-          <a href="{{ customer.get_absolute_url }}">{{customer.company_name}}</a>
+          <a href="{{ project.get_absolute_url }}">{{project.title}}</a>
       </li>
       {% endfor %}
     </ul>
     {% else %}
-      <p>There are no customers in the list.</p>
+      <p>There are no projects in the list.</p>
     {% endif %}
+
+    <br>
+    <a href="{% url 'project-create' %}">Add a new project</a>
+    <br>
 
     {% if page_obj.paginator.num_pages > 1 %}
     <div class="pagination">
