@@ -2,7 +2,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from .models import Customer, Project, Interaction
-from django.urls import reverse
 
 
 class CustomerListView(LoginRequiredMixin, generic.ListView):
