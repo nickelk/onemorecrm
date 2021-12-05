@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Interaction: {{interaction.company}} {{interaction.project}}{% endblock %}
+
+{% block content %}
+
+          <a href="{{ interaction.get_update_url }}">
+              <h1>{{interaction.company}} {{interaction.project}}</h1>
+          </a>
+          <br>
+          <p><strong>Interaction channel: </strong>{{interaction.channel_of_reference}}</p>
+          <p><strong>Manager: </strong>{{interaction.manager}}</p>
+          <p><strong>Description: </strong></p><p>{{interaction.description}}</p>
+          <p><strong>Grade: </strong>{{interaction.grade}}</p>
+
+{% endblock %}

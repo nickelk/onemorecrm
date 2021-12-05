@@ -4,13 +4,13 @@
 
 {% block content %}
 
-          <h1>{{customer.company_name}}</h1>
+          <a href="{{ customer.get_update_url }}"><h1>{{customer.company_name}}</h1></a>
           <br>
           <p><strong>Foreman: </strong>{{customer.foreman_name}}</p>
-          <p><strong>Decsriptions: </strong></p><p>{{customer.descriptions}}</p>
+          <p><strong>Description: </strong></p>{{customer.description}}<br><br>
           <p><strong>Date of creation: </strong>{{customer.date_of_creation}}</p>
           <p><strong>Date of edition: </strong>{{customer.date_of_edition}}</p>
-          <p><strong>Adress: </strong>{{customer.adress}}</p>
+          <p><strong>Address: </strong>{{customer.address}}</p>
           <p><strong>Phone: </strong>{% for phone in customer.phone.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
           <p><strong>Email: </strong>{% for email in customer.email.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 

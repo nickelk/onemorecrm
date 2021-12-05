@@ -59,13 +59,19 @@ class Customer(models.Model):
         """
         return reverse('customer-detail', args=[str(self.id)])
 
+    def get_update_url(self):
+        """
+        Returns the url to access an updating customer instance.
+        """
+        return reverse('customer-update', args=[str(self.id)])
+
 
 class Project(models.Model):
     """
     Class defining a model of project.
     """
-    title = models.CharField(max_length=300, help_text="Project title")
-    description = RichTextField(help_text="Describe the project")
+    title = models.CharField(max_length=300)
+    description = RichTextField()
     begin_date = models.DateField(default=date.today, help_text="Project start date")
     end_date = models.DateField(null=True, blank=True, help_text="Project end date")
     price = models.FloatField()
@@ -82,6 +88,12 @@ class Project(models.Model):
         """
         return reverse('project-detail', args=[str(self.id)])
 
+    def get_update_url(self):
+        """
+        Returns the url to access an updating project instance.
+        """
+        return reverse('project-update', args=[str(self.id)])
+
 
 class Interaction(models.Model):
     """
@@ -91,30 +103,29 @@ class Interaction(models.Model):
     company = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
     CHANNEL = (
-        ('r', 'Request'),
-        ('l', 'Letter'),
-        ('w', 'Web site'),
-        ('c', 'Company init.'),
+        ('Request', 'Request'),
+        ('Letter', 'Letter'),
+        ('Web site', 'Web site'),
+        ('Company init.', 'Company initiates'),
     )
 
-    channel_of_reference = models.CharField(max_length=1,
+    channel_of_reference = models.CharField(max_length=15,
                                             choices=CHANNEL,
                                             blank=True,
-                                            default='r',
+                                            default='Request',
                                             help_text='Interaction way')
 
     manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = RichTextField(help_text="Describe the interaction")
 
-    GRADES = ((-5, '-5'), (-4, '-4'), (-3, '-3'), (-2, '-2'), (-1, '-1'),
-              (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'))
+    GRADES = (('-5', '-5'), ('-4', '-4'), ('-3', '-3'), ('-2', '-2'), ('-1', '-1'),
+              ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'))
 
-    grade = models.DecimalField(decimal_places=2,
-                                max_digits=2,
-                                choices=GRADES,
-                                blank=True,
-                                default=1,
-                                help_text='Interaction grade')
+    grade = models.CharField(max_length=2,
+                             choices=GRADES,
+                             blank=True,
+                             default='1',
+                             help_text='Interaction grade')
 
     date_of_creation = models.DateField(auto_now_add=True)
     date_of_edition = models.DateField(auto_now=True)
@@ -124,3 +135,15 @@ class Interaction(models.Model):
         String for representing the Model object.
         """
         return 'Proj.: %s, Comp.: %s' % (self.project, self.company)
+
+    def get_absolute_url(self):
+        """
+        Returns the url to access a particular interaction instance.
+        """
+        return reverse('interaction-detail', args=[str(self.id)])
+
+    def get_update_url(self):
+        """
+        Returns the url to access an updating interaction instance.
+        """
+        return reverse('interaction-update', args=[str(self.id)])

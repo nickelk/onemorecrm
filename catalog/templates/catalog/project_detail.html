@@ -4,8 +4,11 @@
 
 {% block content %}
 
-          <h1>{{project.title}}</h1>
+          <a href="{{ project.get_update_url }}"><h1>{{project.title}}</h1></a>
           <br>
-          <p><strong>Description: </strong>{{project.description}}</p>
+          <p><strong>Description: </strong></p><p>{{project.description}}</p>
+          <p><strong>Begin Date: </strong>{{project.begin_date}}</p>
+          <p><strong>End Date: </strong>{{project.end_date}}</p>
+          <p><strong>Price: </strong>{{project.price}}</p>
 
 {% endblock %}
