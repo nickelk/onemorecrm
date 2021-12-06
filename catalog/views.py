@@ -1,5 +1,6 @@
 # Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.datastructures import MultiValueDictKeyError
 from django.views import generic
 from .models import Customer, Project, Interaction
 
@@ -10,7 +11,18 @@ class CustomerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        return Customer.objects.order_by(self.request.GET['order'])
+        try:
+            if self.request.GET['order'] == '-company_name':
+                order = '-company_name'
+            elif self.request.GET['order'] == 'date_of_creation':
+                order = 'date_of_creation'
+            elif self.request.GET['order'] == '-date_of_creation':
+                order = '-date_of_creation'
+            else:
+                order = 'company_name'
+        except MultiValueDictKeyError:
+            order = 'company_name'
+        return Customer.objects.order_by(order)
 
 
 class CustomerDetailView(LoginRequiredMixin, generic.DetailView):
