@@ -9,6 +9,9 @@ class CustomerListView(LoginRequiredMixin, generic.ListView):
     model = Customer
     paginate_by = 4
 
+    def get_queryset(self):
+        return Customer.objects.order_by(self.request.GET['order'])
+
 
 class CustomerDetailView(LoginRequiredMixin, generic.DetailView):
     login_url = 'accounts/login'

@@ -5,6 +5,10 @@
 {% block content %}
     <h1>Customer List</h1>
 
+    <p>Sort by: <a href="?order=company_name">Company name</a>
+        <a href="?order=-company_name">Company name reverse</a>
+    </p>
+
     {% if customer_list %}
     <ul>
       {% for customer in customer_list %}
