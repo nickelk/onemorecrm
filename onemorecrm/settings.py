@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog.apps.CatalogConfig',
     'project.apps.ProjectConfig',
+    'interaction.apps.InteractionConfig',
     'ckeditor',
 ]
 

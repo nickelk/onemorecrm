@@ -21,6 +21,10 @@
       <p>There are no customers in the list.</p>
     {% endif %}
 
+    <br>
+    <a href="{% url 'customer-create' %}">Add a new customer</a>
+    <br>
+
     {% if page_obj.paginator.num_pages > 1 %}
     <div class="pagination">
     <span class="step-links">

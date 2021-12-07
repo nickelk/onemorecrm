@@ -22,12 +22,4 @@ urlpatterns = [
     url(r'^customer/(?P<pk>\d+)$', views.CustomerDetailView.as_view(), name='customer-detail'),
     path('customer/create/', views.CustomerCreate.as_view(), name='customer-create'),
     url(r'^customer/update/(?P<pk>\d+)$', views.CustomerUpdate.as_view(), name='customer-update'),
-    path('project/list', views.ProjectListView.as_view(), name='project-list'),
-    path('project/create/', views.ProjectCreate.as_view(), name='project-create'),
-    url(r'^project/(?P<pk>\d+)$', views.ProjectDetailView.as_view(), name='project-detail'),
-    url(r'^project/update/(?P<pk>\d+)$', views.ProjectUpdate.as_view(), name='project-update'),
-    path('interaction/list', views.InteractionListView.as_view(), name='interaction-list'),
-    path('interaction/create/', views.InteractionCreate.as_view(), name='interaction-create'),
-    url(r'^interaction/(?P<pk>\d+)$', views.InteractionDetailView.as_view(), name='interaction-detail'),
-    url(r'^interaction/update/(?P<pk>\d+)$', views.InteractionUpdate.as_view(), name='interaction-update'),
 ]
