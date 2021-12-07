@@ -7,7 +7,7 @@ from .models import Project
 
 
 class ProjectListView(LoginRequiredMixin, generic.ListView):
-    login_url = 'accounts/login'
+    # login_url = 'accounts/login'
     model = Project
     paginate_by = 4
 
