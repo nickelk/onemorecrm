@@ -8,7 +8,7 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid" style="margin-left:20px;margin-top:20px">
 
     <div class="row">
       <div class="col-sm-2">
@@ -18,7 +18,7 @@
           <li><a href="{% url 'project-list' %}">Projects list</a></li>
           <li><a href="{% url 'interaction-list' %}">Interaction list</a></li>
           {% if perms.catalog.can_view_interaction %}
-              <li><a href="">View my interactions</a></li>
+              <li><a href="{% url 'my-interaction-list' %}">View my interactions</a></li>
           {% endif %}
           {% if user.is_authenticated %}
               <li>User: <strong>{{ user.get_username }}</strong></li>

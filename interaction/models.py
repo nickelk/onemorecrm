@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 from project.models import Project
-from catalog.models import Customer
 from ckeditor.fields import RichTextField
 
 
@@ -11,7 +12,6 @@ class Interaction(models.Model):
     Class defining a model of interaction between customer and contractor.
     """
     project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
-    company = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
     CHANNEL = (
         ('Request', 'Request'),
@@ -38,14 +38,14 @@ class Interaction(models.Model):
                              default='1',
                              help_text='Interaction grade')
 
-    date_of_creation = models.DateField(auto_now_add=True)
-    date_of_edition = models.DateField(auto_now=True)
+    date_of_creation = models.DateTimeField(auto_now_add=True)
+    date_of_edition = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         """
         String for representing the Model object.
         """
-        return 'Proj.: %s, Comp.: %s' % (self.project, self.company)
+        return str(self.date_of_edition)
 
     def get_absolute_url(self):
         """

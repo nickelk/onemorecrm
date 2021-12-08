@@ -14,4 +14,19 @@
           <p><strong>Phone: </strong>{% for phone in customer.phone.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
           <p><strong>Email: </strong>{% for email in customer.email.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
+    <a href=""><h5>Interactions</h5></a>
+    <hr>
+
+    <div style="margin-left:20px;margin-top:20px">
+    <h4>Projects:</h4>
+
+    {% if not customer.project_set.all %}
+        <p>No related projects</p>
+    {% endif %}
+
+    {% for project in customer.project_set.all %}
+        <p><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></p>
+    {% endfor %}
+  </div>
+
 {% endblock %}

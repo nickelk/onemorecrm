@@ -10,7 +10,7 @@
       {% for interaction in interaction_list %}
       <li>
           <a href="{{ interaction.get_absolute_url }}">
-              Proj.: {{interaction.project}}, Comp.: {{interaction.company}}
+              {{interaction.date_of_edition}}, {{interaction.project}}
           </a>
       </li>
       {% endfor %}

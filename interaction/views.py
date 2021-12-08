@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.views import generic
 from .models import Interaction
 
@@ -23,3 +22,16 @@ class InteractionCreate(generic.edit.CreateView):
 class InteractionUpdate(generic.edit.UpdateView):
     model = Interaction
     fields = '__all__'
+
+
+class MyInteractionsListView(PermissionRequiredMixin, generic.ListView):
+    """
+    Generic class-based view listing interactions, created by current user.
+    """
+    permission_required = ''
+    model = Interaction
+    template_name = 'interaction/interaction_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Interaction.objects.filter(manager=self.request.user).order_by('date_of_edition')

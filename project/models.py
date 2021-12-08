@@ -2,6 +2,7 @@ from datetime import date
 
 from ckeditor.fields import RichTextField
 from django.db import models
+from catalog.models import Customer
 
 # Create your models here.
 from django.urls import reverse
@@ -16,6 +17,7 @@ class Project(models.Model):
     begin_date = models.DateField(default=date.today, help_text="Project start date")
     end_date = models.DateField(null=True, blank=True, help_text="Project end date")
     price = models.FloatField()
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         """

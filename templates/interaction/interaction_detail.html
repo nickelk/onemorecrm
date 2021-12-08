@@ -4,13 +4,13 @@
 
 {% block content %}
 
-          <a href="{{ interaction.get_update_url }}">
-              <h1>{{interaction.company}} {{interaction.project}}</h1>
-          </a>
+          <h1>{{interaction.date_of_edition}}</h1>
           <br>
+          <p><strong>Project: </strong>{{interaction.project}}</p>
           <p><strong>Interaction channel: </strong>{{interaction.channel_of_reference}}</p>
           <p><strong>Manager: </strong>{{interaction.manager}}</p>
           <p><strong>Description: </strong></p><p>{{interaction.description}}</p>
           <p><strong>Grade: </strong>{{interaction.grade}}</p>
+          <a href="{{ interaction.get_update_url }}">Update interaction</a>
 
 {% endblock %}

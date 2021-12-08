@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Project: {{project.title}}{% endblock %}
+
+{% block content %}
+
+    <a href="{{ project.get_update_url }}"><h1>{{project.title}}</h1></a>
+    <br>
+    <p><strong>Description: </strong></p><p>{{project.description}}</p>
+    <p><strong>Begin Date: </strong>{{project.begin_date}}</p>
+    <p><strong>End Date: </strong>{{project.end_date}}</p>
+    <p><strong>Price: </strong>{{project.price}}</p>
+    <hr>
+
+    <div style="margin-left:20px;margin-top:20px">
+
+        <a href="{% url 'interaction-create' %}">Add new interaction</a>
+        <br><br>
+        <h4>Interactions:</h4>
+        {% if not project.interaction_set.all %}
+            <p>No related interactions</p>
+        {% endif %}
+
+        {% for interaction in project.interaction_set.all %}
+            <p>
+                <a href="{{ interaction.get_absolute_url }}">
+                    {{ interaction.date_of_edition }}
+                </a>
+            </p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

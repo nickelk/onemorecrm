@@ -10,6 +10,9 @@ class Phone(models.Model):
     Class defining a model, derived from the Model class.
     """
     phone = models.CharField(max_length=30, help_text="Phone number")
+    date_of_creation = models.DateField(auto_now_add=True)
+    date_of_edition = models.DateField(auto_now=True)
+    customer = models.ForeignKey('Customer', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         """
@@ -23,6 +26,9 @@ class Email(models.Model):
     Class defining a model, derived from the Model class.
     """
     email = models.EmailField(help_text="Email")
+    date_of_creation = models.DateField(auto_now_add=True)
+    date_of_edition = models.DateField(auto_now=True)
+    customer = models.ForeignKey('Customer', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         """
@@ -41,8 +47,6 @@ class Customer(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
     date_of_edition = models.DateField(auto_now=True)
     address = models.CharField(null=True, max_length=300, help_text="Address of the organization")
-    phone = models.ManyToManyField(Phone, help_text="Phone number(s)")
-    email = models.ManyToManyField(Email, help_text="Email(s)")
 
     def __str__(self):
         """
