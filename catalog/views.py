@@ -31,10 +31,14 @@ class CustomerDetailView(LoginRequiredMixin, DetailView):
     login_url = 'accounts/login'
     model = Customer
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(CustomerDetailView, self).get_context_data(**kwargs)
-    #     print(context['object'])
-    #     return context
+    def get_context_data(self, **kwargs):
+        """
+        Add phones and e-mails into context
+        """
+        context = super(CustomerDetailView, self).get_context_data(**kwargs)
+        context['phones'] = Phone.objects.all().filter(customer_id=self.kwargs.get('pk'))
+        context['emails'] = Email.objects.all().filter(customer_id=self.kwargs.get('pk'))
+        return context
 
 
 class CustomerCreateView(CreateView):
