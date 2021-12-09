@@ -11,8 +11,9 @@
           <p><strong>Date of creation: </strong>{{customer.date_of_creation}}</p>
           <p><strong>Date of edition: </strong>{{customer.date_of_edition}}</p>
           <p><strong>Address: </strong>{{customer.address}}</p>
-          <p><strong>Phone: </strong>{% for phone in customer.phone.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-          <p><strong>Email: </strong>{% for email in customer.email.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+{#    {% for i in customer.objects %}{{ i }}{% endfor %}#}
+          <p><strong>Phone(s): </strong>{% for phone in phone.phone.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+          <p><strong>Email(s): </strong>{% for email in customer.email.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
 
     <a href=""><h5>Interactions</h5></a>
     <hr>

@@ -7,8 +7,12 @@
     <table>
     {{ form.media }}
     {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit" />
 
+    {{ phone_formset }}
+    {{ email_formset }}
+    </table>
+    <br>
+    <input type="submit" value="Submit" />
 </form>
+
 {% endblock %}

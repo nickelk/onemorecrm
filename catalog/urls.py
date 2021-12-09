@@ -20,6 +20,6 @@ from . import views
 urlpatterns = [
     path('', views.CustomerListView.as_view(), name='home'),
     url(r'^customer/(?P<pk>\d+)$', views.CustomerDetailView.as_view(), name='customer-detail'),
-    path('customer/create/', views.CustomerCreate.as_view(), name='customer-create'),
-    url(r'^customer/update/(?P<pk>\d+)$', views.CustomerUpdate.as_view(), name='customer-update'),
+    path('customer/create/', views.CustomerCreateView.as_view(), name='customer-create'),
+    url(r'^customer/update/(?P<pk>\d+)$', views.CustomerUpdateView.as_view(), name='customer-update'),
 ]
