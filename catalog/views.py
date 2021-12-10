@@ -1,4 +1,3 @@
-# Create your views here.
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
 from django.utils.datastructures import MultiValueDictKeyError
@@ -41,7 +40,8 @@ class CustomerDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class CustomerCreateView(CreateView):
+class CustomerCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = 'customer.add_customer'
     model = Customer
     fields = '__all__'
 
@@ -65,7 +65,7 @@ class CustomerCreateView(CreateView):
 
 
 class CustomerUpdateView(UpdateView):
-
+    permission_required = 'customer.change_customer'
     model = Customer
     fields = '__all__'
 
@@ -84,7 +84,6 @@ class CustomerUpdateView(UpdateView):
         else:
             context['phone_formset'] = PhoneInlineFormSet(instance=self.object)
             context['email_formset'] = EmailInlineFormSet(instance=self.object)
-        # print(context['phone_formset'])
         return context
 
     def form_valid(self, form):
