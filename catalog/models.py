@@ -62,6 +62,12 @@ class Customer(models.Model):
 
     def get_update_url(self):
         """
-        Returns the url to access an updating customer instance.
+        Returns the url to update customer instance.
         """
         return reverse('customer-update', args=[str(self.id)])
+
+    def get_delete_url(self):
+        """
+        Returns the url to delete customer instance.
+        """
+        return reverse('customer-delete', args=[str(self.id)])

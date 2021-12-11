@@ -33,6 +33,12 @@ class Project(models.Model):
 
     def get_update_url(self):
         """
-        Returns the url to access an updating project instance.
+        Returns the url to update project instance.
         """
         return reverse('project-update', args=[str(self.id)])
+
+    def get_delete_url(self):
+        """
+        Returns the url to delete project instance.
+        """
+        return reverse('project-delete', args=[str(self.id)])

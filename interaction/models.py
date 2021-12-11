@@ -55,6 +55,12 @@ class Interaction(models.Model):
 
     def get_update_url(self):
         """
-        Returns the url to access an updating interaction instance.
+        Returns the url to update interaction instance.
         """
         return reverse('interaction-update', args=[str(self.id)])
+
+    def get_delete_url(self):
+        """
+        Returns the url to delete interaction instance.
+        """
+        return reverse('interaction-delete', args=[str(self.id)])

@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^customer/(?P<pk>\d+)$', views.CustomerDetailView.as_view(), name='customer-detail'),
     path('customer/create/', views.CustomerCreateView.as_view(), name='customer-create'),
     url(r'^customer/update/(?P<pk>\d+)$', views.CustomerUpdateView.as_view(), name='customer-update'),
+    url(r'^customer/delete/(?P<pk>\d+)$', views.CustomerDeleteView.as_view(), name='customer-delete'),
 ]

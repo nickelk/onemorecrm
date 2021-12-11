@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Project
 
 
@@ -13,13 +14,19 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
 
 
-class ProjectCreate(PermissionRequiredMixin, CreateView):
+class ProjectCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'project.add_project'
     model = Project
     fields = '__all__'
 
 
-class ProjectUpdate(PermissionRequiredMixin, UpdateView):
+class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'project.change_project'
     model = Project
     fields = '__all__'
+
+
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'project.delete_project'
+    model = Project
+    success_url = reverse_lazy('project-list')

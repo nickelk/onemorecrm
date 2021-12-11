@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.forms import inlineformset_factory
+from django.urls import reverse_lazy
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Customer, Phone, Email
 
 
@@ -99,3 +100,8 @@ class CustomerUpdateView(UpdateView):
             else:
                 return super().form_invalid(form)
 
+
+class CustomerDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'customer.delete_customer'
+    model = Customer
+    success_url = reverse_lazy('home')

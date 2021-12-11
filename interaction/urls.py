@@ -2,7 +2,6 @@ from django.conf.urls import url
 from django.urls import path
 from django_filters.views import FilterView
 from . import views
-from .models import Interaction
 from .filters import InteractionFilter
 
 urlpatterns = [
@@ -12,4 +11,5 @@ urlpatterns = [
     path('create/', views.InteractionCreateView.as_view(), name='interaction-create'),
     url(r'^(?P<pk>\d+)$', views.InteractionDetailView.as_view(), name='interaction-detail'),
     url(r'^update/(?P<pk>\d+)$', views.InteractionUpdateView.as_view(), name='interaction-update'),
+    url(r'^delete/(?P<pk>\d+)$', views.InteractionDeleteView.as_view(), name='interaction-delete'),
 ]
