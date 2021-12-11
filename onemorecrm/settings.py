@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'interaction.apps.InteractionConfig',
     'ckeditor',
     'debug_toolbar',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
