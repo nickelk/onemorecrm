@@ -16,8 +16,8 @@
       <ul class="sidebar-nav">
           <li><a href="{% url 'home' %}">Home</a></li>
           <li><a href="{% url 'project-list' %}">Projects list</a></li>
-          <li><a href="{% url 'interaction-list' %}">Interaction list</a></li>
           {% if perms.interaction.view_interaction %}
+              <li><a href="{% url 'search-interaction-list' %}">Interaction list</a></li>
               <li><a href="{% url 'my-interaction-list' %}">View my interactions</a></li>
           {% endif %}
           {% if user.is_authenticated %}
