@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from owncabinet.models import OwnCabinet
 from django.urls import reverse
 
 from project.models import Project
@@ -25,7 +26,7 @@ class Interaction(models.Model):
                                             default='REQUEST',
                                             help_text='Interaction way')
 
-    manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    manager = models.ForeignKey(OwnCabinet, on_delete=models.SET_NULL, null=True)
     description = RichTextField(help_text="Describe the interaction")
 
     class Grades(models.IntegerChoices):
