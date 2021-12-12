@@ -13,30 +13,37 @@ class Interaction(models.Model):
     """
     project = models.ForeignKey(Project, on_delete=models.SET_NULL, null=True)
 
-    CHANNEL = (
-        ('Request', 'Request'),
-        ('Letter', 'Letter'),
-        ('Web site', 'Web site'),
-        ('Company init.', 'Company initiates'),
-    )
+    class Channel(models.TextChoices):
+        REQUEST = 'Request', 'Request'
+        LETTER = 'Letter', 'Letter'
+        WEB_SITE = 'Web site', 'Web site'
+        COMP_INIT = 'Company init.', 'Company initiates'
 
     channel_of_reference = models.CharField(max_length=15,
-                                            choices=CHANNEL,
+                                            choices=Channel.choices,
                                             blank=True,
-                                            default='Request',
+                                            default='REQUEST',
                                             help_text='Interaction way')
 
     manager = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     description = RichTextField(help_text="Describe the interaction")
 
-    GRADES = (('-5', '-5'), ('-4', '-4'), ('-3', '-3'), ('-2', '-2'), ('-1', '-1'),
-              ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'))
+    class Grades(models.IntegerChoices):
+        FIVE = 5, '5'
+        FOUR = 4, '4'
+        THREE = 3, '3'
+        TWO = 2, '2'
+        ONE = 1, '1'
+        M_ONE = -1, '-1'
+        M_TWO = -2, '-2'
+        M_THREE = -3, '-3'
+        M_FOUR = -4, '-4'
+        M_FIVE = -5, '-5'
 
-    grade = models.CharField(max_length=2,
-                             choices=GRADES,
-                             blank=True,
-                             default='1',
-                             help_text='Interaction grade')
+    grade = models.IntegerField(choices=Grades.choices,
+                                blank=True,
+                                default='ONE',
+                                help_text='Interaction grade')
 
     date_of_creation = models.DateTimeField(auto_now_add=True)
     date_of_edition = models.DateTimeField(auto_now=True)
