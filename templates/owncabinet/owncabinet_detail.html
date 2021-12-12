@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block title %}{{owncabinet.get_username}}{% endblock %}
+
+{% block content %}
+
+{#    <a href="{{ project.get_update_url }}"><h1>{{project.title}}</h1></a>#}
+{#    <br>#}
+    <p><strong>Username: </strong><h1>{{owncabinet.get_username}}</h1></p>
+    <p><strong>Avatar: </strong></p>
+    <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+              <img class="card-image-top" src="{{ owncabinet.avatar.url }}">
+          </div>
+        </div>
+    <p><strong>First name: </strong>{{owncabinet.first_name}}</p>
+    <p><strong>Last name: </strong>{{owncabinet.last_name}}</p>
+    <p><strong>E-mail: </strong>{{owncabinet.email}}</p>
+    <p><strong>Password: </strong>{{owncabinet.password}}</p>
+    <hr>
+    <a href="{{ owncabinet.get_update_url }}"><h5>Edit my profile</h5></a>
+
+{% endblock %}

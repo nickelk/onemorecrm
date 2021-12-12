@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView
+from .models import OwnCabinet
 
-# Create your views here.
+
+class OwnCabinetDetailView(LoginRequiredMixin, DetailView):
+    model = OwnCabinet
