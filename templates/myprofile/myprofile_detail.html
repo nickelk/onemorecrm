@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Project: {{project.title}}{% endblock %}
+
+{% block content %}
+
+    <a href="{{ project.get_update_url }}"><h1>{{ user.get_username }}</h1></a>
+    <br>
+    {{ user.avatar }}
+    <p><strong>Description: </strong></p><p>{{project.description}}</p>
+    <p><strong>Begin Date: </strong>{{project.begin_date}}</p>
+    <p><strong>End Date: </strong>{{project.end_date}}</p>
+    <p><strong>Price: </strong>{{project.price}}</p>
+    <a href="{{ project.get_delete_url }}">Delete project</a>
+
+{% endblock %}
