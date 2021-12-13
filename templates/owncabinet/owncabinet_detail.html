@@ -4,8 +4,6 @@
 
 {% block content %}
 
-{#    <a href="{{ project.get_update_url }}"><h1>{{project.title}}</h1></a>#}
-{#    <br>#}
     <p><strong>Username: </strong><h1>{{owncabinet.get_username}}</h1></p>
     <p><strong>Avatar: </strong></p>
     <div class="col-md-4">
@@ -16,8 +14,50 @@
     <p><strong>First name: </strong>{{owncabinet.first_name}}</p>
     <p><strong>Last name: </strong>{{owncabinet.last_name}}</p>
     <p><strong>E-mail: </strong>{{owncabinet.email}}</p>
-    <p><strong>Password: </strong>{{owncabinet.password}}</p>
+    <a href="{% url 'password_change' %}"><h5>Change password</h5></a>
+    <a href="{{ owncabinet.get_profile_update_url }}"><h5>Edit my profile</h5></a>
     <hr>
-    <a href="{{ owncabinet.get_update_url }}"><h5>Edit my profile</h5></a>
+
+    {% if perms.interaction.view_interaction %}
+            <h3>My Interaction List</h3>
+
+        {% if interaction_list %}
+        <ul>
+          {% for interaction in interaction_list %}
+          <li>
+              <a href="{{ interaction.get_absolute_url }}">
+                  {{interaction.date_of_edition}}, {{interaction.project}}
+              </a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+          <p>There are no interactions in the list.</p>
+        {% endif %}
+
+        <br>
+        <a href="{% url 'interaction-create' %}">Add new interaction</a>
+        <br>
+
+        {% if page_obj.paginator.num_pages > 1 %}
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+        </div>
+        {% endif %}
+    {% endif %}
 
 {% endblock %}
