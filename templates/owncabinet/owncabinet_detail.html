@@ -15,7 +15,7 @@
     <p><strong>Last name: </strong>{{owncabinet.last_name}}</p>
     <p><strong>E-mail: </strong>{{owncabinet.email}}</p>
     <a href="{% url 'password_change' %}"><h5>Change password</h5></a>
-    <a href="{{ owncabinet.get_profile_update_url }}"><h5>Edit my profile</h5></a>
+    <a href="{% url 'owncabinet-update' %}"><h5>Edit my profile</h5></a>
     <hr>
 
     {% if perms.interaction.view_interaction %}
