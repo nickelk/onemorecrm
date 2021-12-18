@@ -52,17 +52,30 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
         """
         PhoneInlineFormSet = inlineformset_factory(Customer, Phone, fields=('phone',), can_delete=True, extra=1)
         EmailInlineFormSet = inlineformset_factory(Customer, Email, fields=('email',), can_delete=True, extra=1)
+
         context = super(CustomerCreateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            context['phone_formset'] = PhoneInlineFormSet(self.request.POST, instance=self.object)
+            context['phone_formset'] = PhoneInlineFormSet(self.request.POST, instance=self.object, prefix='phones')
             context['phone_formset'].full_clean()
-            context['email_formset'] = EmailInlineFormSet(self.request.POST, instance=self.object)
+            context['email_formset'] = EmailInlineFormSet(self.request.POST, instance=self.object, prefix='emails')
             context['email_formset'].full_clean()
         else:
-            context['phone_formset'] = PhoneInlineFormSet(instance=self.object)
-            context['email_formset'] = EmailInlineFormSet(instance=self.object)
-        # print(context['phone_formset'])
+            context['phone_formset'] = PhoneInlineFormSet(instance=self.object, prefix='phones')
+            context['email_formset'] = EmailInlineFormSet(instance=self.object, prefix='emails')
         return context
+
+    def form_valid(self, form):
+        """
+        Check formset validity and save it
+        """
+        context = self.get_context_data(form=form)
+        formsets = [context['phone_formset'], context['email_formset']]
+        for formset in formsets:
+            if formset.is_valid():
+                formset.save(commit=False)
+            else:
+                return super().form_invalid(form)
+        return super().form_valid(form)
 
 
 class CustomerUpdateView(UpdateView):
@@ -78,13 +91,13 @@ class CustomerUpdateView(UpdateView):
         EmailInlineFormSet = inlineformset_factory(Customer, Email, fields=('email',), can_delete=True, extra=1)
         context = super(CustomerUpdateView, self).get_context_data(**kwargs)
         if self.request.POST:
-            context['phone_formset'] = PhoneInlineFormSet(self.request.POST, instance=self.object)
+            context['phone_formset'] = PhoneInlineFormSet(self.request.POST, instance=self.object, prefix='phones')
             context['phone_formset'].full_clean()
-            context['email_formset'] = EmailInlineFormSet(self.request.POST, instance=self.object)
+            context['email_formset'] = EmailInlineFormSet(self.request.POST, instance=self.object, prefix='emails')
             context['email_formset'].full_clean()
         else:
-            context['phone_formset'] = PhoneInlineFormSet(instance=self.object)
-            context['email_formset'] = EmailInlineFormSet(instance=self.object)
+            context['phone_formset'] = PhoneInlineFormSet(instance=self.object, prefix='phones')
+            context['email_formset'] = EmailInlineFormSet(instance=self.object, prefix='emails')
         return context
 
     def form_valid(self, form):
@@ -96,9 +109,9 @@ class CustomerUpdateView(UpdateView):
         for formset in formsets:
             if formset.is_valid():
                 formset.save(commit=False)
-                return super().form_valid(form)
             else:
                 return super().form_invalid(form)
+        return super().form_valid(form)
 
 
 class CustomerDeleteView(PermissionRequiredMixin, DeleteView):
