@@ -14,6 +14,10 @@ class Phone(models.Model):
     date_of_edition = models.DateField(auto_now=True)
     customer = models.ForeignKey('Customer', on_delete=models.SET_NULL, null=True)
 
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Phone'
+
     def __str__(self):
         """
         String for representing the Model object
@@ -29,6 +33,10 @@ class Email(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
     date_of_edition = models.DateField(auto_now=True)
     customer = models.ForeignKey('Customer', on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'E-mail'
 
     def __str__(self):
         """
@@ -47,6 +55,10 @@ class Customer(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
     date_of_edition = models.DateField(auto_now=True)
     address = models.CharField(null=True, max_length=300)
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Customer'
 
     def __str__(self):
         """

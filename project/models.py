@@ -19,6 +19,10 @@ class Project(models.Model):
     price = models.FloatField()
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
 
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Project'
+
     def __str__(self):
         """
         String for representing the Model object
