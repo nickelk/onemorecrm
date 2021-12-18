@@ -39,7 +39,7 @@ class MyInteractionsListView(PermissionRequiredMixin, ListView):
     Generic class-based view listing interactions, created by current user.
     """
     permission_required = 'interaction.view_interaction'
-    model = Interaction
+    # model = Interaction
     template_name = 'interaction/my_interaction_list.html'
     paginate_by = 10
 

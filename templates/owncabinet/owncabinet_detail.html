@@ -19,6 +19,7 @@
     <hr>
 
     {% if perms.interaction.view_interaction %}
+        <div style="margin-left:20px;margin-top:20px">
             <h3>My Interaction List</h3>
 
         {% if interaction_list %}
@@ -58,6 +59,7 @@
         </span>
         </div>
         {% endif %}
+        </div>
     {% endif %}
 
 {% endblock %}

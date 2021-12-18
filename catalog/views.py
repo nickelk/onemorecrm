@@ -9,7 +9,7 @@ from .models import Customer, Phone, Email
 
 class CustomerListView(LoginRequiredMixin, ListView):
     login_url = 'accounts/login'
-    model = Customer
+    # model = Customer
     paginate_by = 4
 
     def get_queryset(self):
