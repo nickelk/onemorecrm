@@ -105,7 +105,6 @@ class CustomerDetailViewTest(TestCase):
     def test_view_url_accessible_by_name(self):
         self.client.login(username='john', password='johnpassword')
         resp = self.client.get(reverse('customer-detail', args='1'))
-        print(resp)
         self.assertEqual(resp.status_code, 200)
 
     def test_view_uses_correct_template(self):

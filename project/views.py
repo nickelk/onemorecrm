@@ -7,7 +7,7 @@ from .models import Project
 
 class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
-    paginate_by = 4
+    paginate_by = 5
 
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
