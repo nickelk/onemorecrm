@@ -62,8 +62,8 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
             context['email_formset'] = EmailInlineFormSet(self.request.POST, instance=self.object, prefix='emails')
             context['email_formset'].full_clean()
         else:
-            context['phone_formset'] = PhoneInlineFormSet(instance=self.object, prefix='phones')
-            context['email_formset'] = EmailInlineFormSet(instance=self.object, prefix='emails')
+            context['phone_formset'] = PhoneInlineFormSet(prefix='phones')
+            context['email_formset'] = EmailInlineFormSet(prefix='emails')
         return context
 
     def form_valid(self, form):
