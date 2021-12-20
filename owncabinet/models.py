@@ -4,6 +4,9 @@ from django.urls import reverse
 
 
 class OwnCabinet(AbstractUser):
+    """
+    Class defining a model of user's own cabinet.
+    """
     avatar = models.ImageField(upload_to='avatar_images/',
                                default='avatar_images/default.jpeg')
 
