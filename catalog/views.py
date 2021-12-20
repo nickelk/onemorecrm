@@ -8,11 +8,16 @@ from .models import Customer, Phone, Email
 
 
 class CustomerListView(LoginRequiredMixin, ListView):
+    """
+    View, inherited from generic class
+    """
     login_url = 'accounts/login'
-    # model = Customer
     paginate_by = 5
 
     def get_queryset(self):
+        """
+        Make ordered queryset
+        """
         try:
             if self.request.GET['order'] == '-company_name':
                 order = '-company_name'
@@ -28,20 +33,17 @@ class CustomerListView(LoginRequiredMixin, ListView):
 
 
 class CustomerDetailView(LoginRequiredMixin, DetailView):
+    """
+    View, inherited from generic class
+    """
     login_url = 'accounts/login'
     model = Customer
 
-    def get_context_data(self, **kwargs):
-        """
-        Add phones and e-mails into context
-        """
-        context = super(CustomerDetailView, self).get_context_data(**kwargs)
-        context['phones'] = Phone.objects.all().filter(customer_id=self.kwargs.get('pk'))
-        context['emails'] = Email.objects.all().filter(customer_id=self.kwargs.get('pk'))
-        return context
-
 
 class CustomerCreateView(PermissionRequiredMixin, CreateView):
+    """
+    View, inherited from generic class
+    """
     permission_required = 'customer.add_customer'
     model = Customer
     fields = '__all__'
@@ -79,6 +81,9 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
 
 
 class CustomerUpdateView(UpdateView):
+    """
+    View, inherited from generic class
+    """
     permission_required = 'customer.change_customer'
     model = Customer
     fields = '__all__'
@@ -115,6 +120,9 @@ class CustomerUpdateView(UpdateView):
 
 
 class CustomerDeleteView(PermissionRequiredMixin, DeleteView):
+    """
+    View, inherited from generic class
+    """
     permission_required = 'customer.delete_customer'
     model = Customer
     success_url = reverse_lazy('home')

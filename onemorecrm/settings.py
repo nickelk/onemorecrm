@@ -35,10 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'catalog.apps.CatalogConfig',
     'project.apps.ProjectConfig',
     'interaction.apps.InteractionConfig',
     'owncabinet.apps.OwncabinetConfig',
+
     'ckeditor',
     'debug_toolbar',
     'django_filters',
