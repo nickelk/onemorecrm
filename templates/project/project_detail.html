@@ -4,20 +4,25 @@
 
 {% block content %}
 
-    <a href="{{ project.get_update_url }}"><h1>{{project.title}}</h1></a>
+    <h1>{{project.title}}</h1>
     <br>
     <p><strong>Description: </strong></p><p>{{project.description}}</p>
     <p><strong>Begin Date: </strong>{{project.begin_date}}</p>
     <p><strong>End Date: </strong>{{project.end_date}}</p>
     <p><strong>Price: </strong>{{project.price}}</p>
-    <a href="{{ project.get_delete_url }}">Delete project</a>
+    {% if perms.project.change_project %}
+        <a href="{{ project.get_update_url }}">Update project</a><br>
+    {% endif %}
+    {% if perms.project.delete_project %}
+        <a href="{{ project.get_delete_url }}">Delete project</a>
+    {% endif %}
     <hr>
 
     <div style="margin-left:20px;margin-top:20px">
 
         <a href="{% url 'interaction-create' %}">Add new interaction</a>
         <br><br>
-        <h4>Interactions:</h4>
+        <h4>Project interactions:</h4>
         {% if not project.interaction_set.all %}
             <p>No related interactions</p>
         {% endif %}

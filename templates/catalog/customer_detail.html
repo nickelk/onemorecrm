@@ -4,7 +4,7 @@
 
 {% block content %}
 
-          <a href="{{ customer.get_update_url }}"><h1>{{customer.company_name}}</h1></a>
+          <h1>{{customer.company_name}}</h1>
           <br>
           <p><strong>Foreman: </strong>{{customer.foreman_name}}</p>
           <p><strong>Description: </strong></p>{{customer.description}}<br><br>
@@ -13,9 +13,14 @@
           <p><strong>Address: </strong>{{customer.address}}</p>
           <p><strong>Phone(s): </strong>{% for phone in customer.phone_set.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
           <p><strong>Email(s): </strong>{% for email in customer.email_set.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-
+          {% if perms.customer.change_customer %}
+              <a href="{{ customer.get_update_url }}">Update customer</a><br>
+          {% endif %}
+          {% if perms.customer.delete_customer %}
+              <a href="{{ customer.get_delete_url }}">Delete customer</a>
+          {% endif %}
     <hr>
-    <h4>Projects:</h4>
+    <h4>Customer projects:</h4>
 
     <div style="margin-left:20px;margin-top:20px">
 

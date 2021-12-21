@@ -80,7 +80,7 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class CustomerUpdateView(UpdateView):
+class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
     """
     View, inherited from generic class
     """

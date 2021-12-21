@@ -18,8 +18,8 @@ from . import views
 
 urlpatterns = [
     path('', views.CustomerListView.as_view(), name='home'),
-    re_path(r'^customer/(?P<pk>\d+)$', views.CustomerDetailView.as_view(), name='customer-detail'),
     path('customer/create/', views.CustomerCreateView.as_view(), name='customer-create'),
+    re_path(r'^customer/(?P<pk>\d+)$', views.CustomerDetailView.as_view(), name='customer-detail'),
     re_path(r'^customer/update/(?P<pk>\d+)$', views.CustomerUpdateView.as_view(), name='customer-update'),
     re_path(r'^customer/delete/(?P<pk>\d+)$', views.CustomerDeleteView.as_view(), name='customer-delete'),
 ]
