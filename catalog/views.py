@@ -74,7 +74,10 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
         formsets = [context['phone_formset'], context['email_formset']]
         for formset in formsets:
             if formset.is_valid():
-                formset.save(commit=False)
+                contacts = formset.save(commit=False)
+                for contact in contacts:
+                    contact.customer = self.object
+                    contact.save()
             else:
                 return super().form_invalid(form)
         return super().form_valid(form)
@@ -113,7 +116,10 @@ class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
         formsets = [context['phone_formset'], context['email_formset']]
         for formset in formsets:
             if formset.is_valid():
-                formset.save(commit=False)
+                contacts = formset.save(commit=False)
+                for contact in contacts:
+                    contact.customer = self.object
+                    contact.save()
             else:
                 return super().form_invalid(form)
         return super().form_valid(form)
