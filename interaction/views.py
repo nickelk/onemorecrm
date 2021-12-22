@@ -28,7 +28,16 @@ class InteractionCreateView(PermissionRequiredMixin, CreateView):
     """
     permission_required = 'interaction.add_interaction'
     model = Interaction
-    fields = '__all__'
+    fields = ['project', 'channel_of_reference', 'description', 'grade']
+
+    def form_valid(self, form):
+        if form.is_valid():
+            interaction = form.save(commit=False)
+            interaction.manager = self.request.user
+            interaction.save()
+        else:
+            return super(InteractionCreateView, self).form_invalid(form)
+        return super(InteractionCreateView, self).form_valid(form)
 
 
 class InteractionUpdateView(PermissionRequiredMixin, UpdateView):
@@ -37,7 +46,7 @@ class InteractionUpdateView(PermissionRequiredMixin, UpdateView):
     """
     permission_required = 'interaction.change_interaction'
     model = Interaction
-    fields = '__all__'
+    fields = ['channel_of_reference', 'description', 'grade']
 
 
 class InteractionDeleteView(PermissionRequiredMixin, DeleteView):

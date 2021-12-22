@@ -44,7 +44,7 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
     """
     View, inherited from generic class
     """
-    permission_required = 'customer.add_customer'
+    permission_required = 'catalog.add_customer'
     model = Customer
     fields = '__all__'
 
@@ -87,7 +87,7 @@ class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
     """
     View, inherited from generic class
     """
-    permission_required = 'customer.change_customer'
+    permission_required = 'catalog.change_customer'
     model = Customer
     fields = '__all__'
 
@@ -129,6 +129,6 @@ class CustomerDeleteView(PermissionRequiredMixin, DeleteView):
     """
     View, inherited from generic class
     """
-    permission_required = 'customer.delete_customer'
+    permission_required = 'catalog.delete_customer'
     model = Customer
     success_url = reverse_lazy('home')

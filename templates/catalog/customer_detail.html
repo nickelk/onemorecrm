@@ -13,10 +13,10 @@
           <p><strong>Address: </strong>{{customer.address}}</p>
           <p><strong>Phone(s): </strong>{% for phone in customer.phone_set.all %} {{ phone }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
           <p><strong>Email(s): </strong>{% for email in customer.email_set.all %} {{ email }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-          {% if perms.customer.change_customer %}
+          {% if perms.catalog.change_customer %}
               <a href="{{ customer.get_update_url }}">Update customer</a><br>
           {% endif %}
-          {% if perms.customer.delete_customer %}
+          {% if perms.catalog.delete_customer %}
               <a href="{{ customer.get_delete_url }}">Delete customer</a>
           {% endif %}
     <hr>
