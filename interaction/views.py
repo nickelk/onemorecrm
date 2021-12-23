@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Interaction
@@ -47,6 +48,12 @@ class InteractionUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'interaction.change_interaction'
     model = Interaction
     fields = ['channel_of_reference', 'description', 'grade']
+
+    def post(self, request, *args, **kwargs):
+        interaction = self.get_object()
+        if interaction.manager != request.user:
+            raise PermissionDenied()
+        return super(InteractionUpdateView, self).post(request, *args, **kwargs)
 
 
 class InteractionDeleteView(PermissionRequiredMixin, DeleteView):
