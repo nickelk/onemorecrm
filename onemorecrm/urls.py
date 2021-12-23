@@ -20,7 +20,6 @@ from django.urls import path, include
 from django.conf import settings
 
 urlpatterns = [
-    path('debug/', include(debug_toolbar.urls)),
     path('admin/', admin.site.urls),
     path('', include('catalog.urls')),
     path('project/', include('project.urls')),
@@ -28,3 +27,6 @@ urlpatterns = [
     path('owncabinet/', include('owncabinet.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += [path('debug/', include(debug_toolbar.urls)), ]

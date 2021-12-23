@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-d2txr3gl4pkzd^c_i5m!%r&4u@756o9y(&9g-j-65q$e1lbp-r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'owncabinet.apps.OwncabinetConfig',
 
     'ckeditor',
-    'debug_toolbar',
     'django_filters',
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ['debug_toolbar', ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,8 +56,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+if DEBUG:
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 
 ROOT_URLCONF = 'onemorecrm.urls'
 
