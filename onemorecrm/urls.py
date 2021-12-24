@@ -26,7 +26,8 @@ urlpatterns = [
     path('interaction/', include('interaction.urls')),
     path('owncabinet/', include('owncabinet.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
 if settings.DEBUG:
     urlpatterns += [path('debug/', include(debug_toolbar.urls)), ]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
