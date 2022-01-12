@@ -24,6 +24,8 @@
               <li>User: <strong>{{ user.get_username }}</strong></li>
               <li><a href="{% url 'owncabinet' %}">My profile</a></li>
               <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+              <li><a href="{% url 'register-user' %}">Register</a></li>
           {% endif %}
 
       </ul>
