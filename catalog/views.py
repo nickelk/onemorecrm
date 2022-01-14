@@ -1,5 +1,9 @@
+from typing import Any, Dict
+
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.db.models import QuerySet
 from django.forms import inlineformset_factory
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils.datastructures import MultiValueDictKeyError
 from django.views.generic import ListView, DetailView
@@ -14,7 +18,7 @@ class CustomerListView(LoginRequiredMixin, ListView):
     login_url = 'accounts/login'
     paginate_by = 5
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[Customer]:
         """
         Make ordered queryset
         """
@@ -48,7 +52,7 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
     model = Customer
     fields = '__all__'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         """
         Add formsets into context
         """
@@ -66,7 +70,7 @@ class CustomerCreateView(PermissionRequiredMixin, CreateView):
             context['email_formset'] = EmailInlineFormSet(prefix='emails')
         return context
 
-    def form_valid(self, form):
+    def form_valid(self, form) -> HttpResponseRedirect:
         """
         Check formset validity and save it
         """
@@ -91,7 +95,7 @@ class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
     model = Customer
     fields = '__all__'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         """
         Add formsets into context
         """
@@ -108,7 +112,7 @@ class CustomerUpdateView(PermissionRequiredMixin, UpdateView):
             context['email_formset'] = EmailInlineFormSet(instance=self.object, prefix='emails')
         return context
 
-    def form_valid(self, form):
+    def form_valid(self, form) -> HttpResponseRedirect:
         """
         Check formset validity and save it
         """

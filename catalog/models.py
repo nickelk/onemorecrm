@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -18,7 +20,7 @@ class Phone(models.Model):
         ordering = ['id']
         verbose_name = 'Phone'
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String for representing the Model object
         """
@@ -38,7 +40,7 @@ class Email(models.Model):
         ordering = ['id']
         verbose_name = 'E-mail'
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String for representing the Model object
         """
@@ -60,25 +62,25 @@ class Customer(models.Model):
         ordering = ['id']
         verbose_name = 'Customer'
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String for representing the Model object
         """
         return self.company_name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> Optional[str]:
         """
         Returns the url to access a particular customer instance.
         """
         return reverse('customer-detail', args=[str(self.id)])
 
-    def get_update_url(self):
+    def get_update_url(self) -> Optional[str]:
         """
         Returns the url to update customer instance.
         """
         return reverse('customer-update', args=[str(self.id)])
 
-    def get_delete_url(self):
+    def get_delete_url(self) -> Optional[str]:
         """
         Returns the url to delete customer instance.
         """
