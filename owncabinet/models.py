@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
@@ -14,7 +16,7 @@ class OwnCabinet(AbstractUser):
         ordering = ['id']
         verbose_name = 'Custom user profile'
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> Optional[str]:
         """
         Returns the url to access a particular profile instance.
         """

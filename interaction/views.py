@@ -1,5 +1,9 @@
+from typing import Any
+
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.db.models import QuerySet
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Interaction
@@ -31,7 +35,7 @@ class InteractionCreateView(PermissionRequiredMixin, CreateView):
     model = Interaction
     fields = ['project', 'channel_of_reference', 'description', 'grade']
 
-    def form_valid(self, form):
+    def form_valid(self, form) -> HttpResponseRedirect:
         if form.is_valid():
             interaction = form.save(commit=False)
             interaction.manager = self.request.user
@@ -49,7 +53,7 @@ class InteractionUpdateView(PermissionRequiredMixin, UpdateView):
     model = Interaction
     fields = ['channel_of_reference', 'description', 'grade']
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, *args: Any, **kwargs: Any) -> Any:
         interaction = self.get_object()
         if interaction.manager != request.user:
             raise PermissionDenied()
@@ -73,7 +77,7 @@ class MyInteractionsListView(PermissionRequiredMixin, ListView):
     template_name = 'interaction/my_interaction_list.html'
     paginate_by = 10
 
-    def get_queryset(self):
+    def get_queryset(self) -> QuerySet[Interaction]:
         """
         Filtered by manager queryset
         """

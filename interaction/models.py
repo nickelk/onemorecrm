@@ -1,3 +1,5 @@
+from typing import Optional
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -33,25 +35,25 @@ class Interaction(models.Model):
         ordering = ['id']
         verbose_name = 'Interaction'
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String for representing the Model object.
         """
         return str(self.date_of_edition)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> Optional[str]:
         """
         Returns the url to access a particular interaction instance.
         """
         return reverse('interaction-detail', args=[str(self.id)])
 
-    def get_update_url(self):
+    def get_update_url(self) -> Optional[str]:
         """
         Returns the url to update interaction instance.
         """
         return reverse('interaction-update', args=[str(self.id)])
 
-    def get_delete_url(self):
+    def get_delete_url(self) -> Optional[str]:
         """
         Returns the url to delete interaction instance.
         """

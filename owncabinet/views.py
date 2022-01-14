@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, TemplateView
@@ -13,14 +15,14 @@ class OwnCabinetDetailView(LoginRequiredMixin, DetailView):
     """
     model = OwnCabinet
     
-    def setup(self, request, *args, **kwargs):
+    def setup(self, request, *args: Any, **kwargs: Any) -> None:
         """
         Getting current user's id
         """
         self.user_id = request.user.pk
         return super(OwnCabinetDetailView, self).setup(request, *args, **kwargs)
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Any:
         """
         Set pk as current user's id
         """
@@ -36,14 +38,14 @@ class OwnCabinetUpdateView(LoginRequiredMixin, UpdateView):
     model = OwnCabinet
     fields = ['username', 'avatar', 'first_name', 'last_name', 'email']
 
-    def setup(self, request, *args, **kwargs):
+    def setup(self, request, *args: Any, **kwargs: Any) -> None:
         """
         Getting current user's id
         """
         self.user_id = request.user.pk
         return super(OwnCabinetUpdateView, self).setup(request, *args, **kwargs)
 
-    def get_object(self, queryset=None):
+    def get_object(self, queryset=None) -> Any:
         """
         Set pk as current user's id
         """
